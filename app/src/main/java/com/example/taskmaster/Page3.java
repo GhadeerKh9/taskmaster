@@ -12,4 +12,6 @@ public class Page3 extends AppCompatActivity {
         setContentView(R.layout.activity_page3);
     }
 
+
+
 }
