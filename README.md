@@ -6,6 +6,8 @@
 
 ![image](Screenshots/lab26.PNG)
 
+## In this lab we created a home page that have three buttons, each one of them takes you to a page, and that page has the title of the button that was clicked. There's another button that takes you to a settings page where you can enter your name and view it back on the home page.
 
-
-
+![image](Screenshots/Lab27.PNG)
+![image](Screenshots/lab27-3.PNG)
+![image](Screenshots/lab27-2.PNG)
