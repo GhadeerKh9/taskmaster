@@ -15,6 +15,8 @@ public class TaskDetailPage extends AppCompatActivity {
 
         Intent intent = getIntent();
         ((TextView) findViewById(R.id.TaskTitle)).setText(intent.getExtras().getString("title"));
+        ((TextView) findViewById(R.id.textView8)).setText(intent.getExtras().getString("body"));
+        ((TextView) findViewById(R.id.textView7)).setText(intent.getExtras().getString("state"));
 
     }
 }

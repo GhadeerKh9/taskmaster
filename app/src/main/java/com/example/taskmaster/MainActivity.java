@@ -1,6 +1,8 @@
 package com.example.taskmaster;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,9 +11,13 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    private TaskAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        Button button2Page1 = findViewById(R.id.button3);
+        Button button2Page1 = findViewById(R.id.Button3);
         button2Page1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
@@ -40,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        Button buttonSettings = findViewById(R.id.SettingsButton);
+        Button buttonSettings = findViewById(R.id.TaskViewer);
         buttonSettings.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -116,9 +122,30 @@ public class MainActivity extends AppCompatActivity {
    /////////////////////////////////////////////////////////
 
 
+        ArrayList<TaskClass> tasks = new ArrayList<TaskClass>();
+
+        tasks.add(new TaskClass("Math", "Algorithyms", "in progress"));
+        tasks.add(new TaskClass("Science", "Space is a topic in science", "completed"));
+        tasks.add(new TaskClass("Sociology", "Humanities and anthropology play the major role of sociology", "in progress"));
 
 
+        RecyclerView allTasks = findViewById(R.id.TaskID);
 
+        allTasks.setLayoutManager(new LinearLayoutManager(this));
+
+        adapter = new TaskAdapter(tasks, new TaskAdapter.OnTaskItemClickListener() {
+            @Override
+            public void onItemClicked(int position) {
+                Intent goToDetailsIntent = new Intent(getApplicationContext(), TaskDetailPage.class);
+                goToDetailsIntent.putExtra("title", tasks.get(position).title);
+                goToDetailsIntent.putExtra("body", tasks.get(position).body);
+                goToDetailsIntent.putExtra("state", tasks.get(position).state);
+                startActivity(goToDetailsIntent);
+
+            }
+        });
+
+        allTasks.setAdapter(adapter);
 
     }
 
