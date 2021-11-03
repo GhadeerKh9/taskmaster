@@ -6,7 +6,6 @@
 
 ![image](Screenshots/lab26.PNG)
 
-
 # Lab 27
 
 ### In this lab we created a home page that have three buttons, each one of them takes you to a page, and that page has the title of the button that was clicked. There's another button that takes you to a settings page where you can enter your name and view it back on the home page.
@@ -21,3 +20,10 @@
 
 ![image](Screenshots/Lab28-1.PNG)
 ![image](Screenshots/Lab28-2.PNG)
+
+# Lab 29
+
+### In this lab we created database, added data to it by clicking on a button that is on some page, rendered the data on the home page, and when someone clicks on the data, they will be taken into another page that presents this data.PNG
+
+![image](Screenshots/Lab-29-1.PNG)
+![image](Screenshots/Lab29-2.PNG)
