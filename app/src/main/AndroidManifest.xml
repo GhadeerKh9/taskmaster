@@ -10,15 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TaskMaster">
         <activity
-            android:parentActivityName=".MainActivity"
             android:name=".TaskDetailPage"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SettingsPage"
             android:exported="true"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".Page3"
+            android:name=".AddTaskPage"
             android:exported="true"
             android:parentActivityName=".MainActivity" />
         <activity

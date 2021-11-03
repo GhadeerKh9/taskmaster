@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,22 +24,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button button1 = findViewById(R.id.addTask);
-        button1.setOnClickListener(new View.OnClickListener() {
-
-    @Override
-            public void onClick(View view){
-        Intent intent1 = new Intent(MainActivity.this, Page2.class);
-        startActivity(intent1);
-    }
-
-        });
+//        Button button1 = findViewById(R.id.addTask);
+//        button1.setOnClickListener(new View.OnClickListener() {
+//
+//    @Override
+//            public void onClick(View view){
+//        Intent intent1 = new Intent(MainActivity.this, Page2.class);
+//        startActivity(intent1);
+//    }
+//
+//        });
 
         Button button2Page1 = findViewById(R.id.Button3);
         button2Page1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                Intent intent2 = new Intent(MainActivity.this, Page3.class);
+                Intent intent2 = new Intent(MainActivity.this, AddTaskPage.class);
                 startActivity(intent2);
             }
 
@@ -58,75 +58,76 @@ public class MainActivity extends AppCompatActivity {
         });
 ///////////////////////////////////////////////////////////////////////////////////
 
-        Button task1Button = findViewById(R.id.Task1Button);
-        task1Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                Intent intent4 = new Intent(MainActivity.this, TaskDetailPage.class);
-                String task1 = task1Button.getText().toString();
-
-
-                intent4.putExtra("title", task1);
-
-                startActivity(intent4);
-
-
-
-            }
-
-
-
-        });
-
-        Button task2Button = findViewById(R.id.Task2Button);
-        task2Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                Intent intent5 = new Intent(MainActivity.this, TaskDetailPage.class);
-                String task2 = task2Button.getText().toString();
-
-
-                intent5.putExtra("title", task2);
-
-                startActivity(intent5);
-
-
-
-            }
-
-        });
-
-
-        Button task3Button = findViewById(R.id.Task3Button);
-        task3Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                Intent intent6 = new Intent(MainActivity.this, TaskDetailPage.class);
-                String task3 = task3Button.getText().toString();
-
-
-                intent6.putExtra("title", task3);
-
-                startActivity(intent6);
-
-
-
-            }
-
-
-
-
-
-        });
+//        Button task1Button = findViewById(R.id.Task1Button);
+//        task1Button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view){
+//                Intent intent4 = new Intent(MainActivity.this, TaskDetailPage.class);
+//                String task1 = task1Button.getText().toString();
+//
+//
+//                intent4.putExtra("title", task1);
+//
+//                startActivity(intent4);
+//
+//
+//
+//            }
+//
+//
+//
+//        });
+//
+//        Button task2Button = findViewById(R.id.Task2Button);
+//        task2Button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view){
+//                Intent intent5 = new Intent(MainActivity.this, TaskDetailPage.class);
+//                String task2 = task2Button.getText().toString();
+//
+//
+//                intent5.putExtra("title", task2);
+//
+//                startActivity(intent5);
+//
+//
+//
+//            }
+//
+//        });
+//
+//
+//        Button task3Button = findViewById(R.id.Task3Button);
+//        task3Button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view){
+//                Intent intent6 = new Intent(MainActivity.this, TaskDetailPage.class);
+//                String task3 = task3Button.getText().toString();
+//
+//
+//                intent6.putExtra("title", task3);
+//
+//                startActivity(intent6);
+//
+//
+//
+//            }
+//
+//
+//
+//
+//
+//        });
 
    /////////////////////////////////////////////////////////
 
 
-        ArrayList<TaskClass> tasks = new ArrayList<TaskClass>();
+//        ArrayList<TaskClass> tasks = new ArrayList<TaskClass>();
+        List<TaskClass> tasks = TasksDatabase.getInstance(this).tasksDAO().getAll();
 
-        tasks.add(new TaskClass("Math", "Algorithyms", "in progress"));
-        tasks.add(new TaskClass("Science", "Space is a topic in science", "completed"));
-        tasks.add(new TaskClass("Sociology", "Humanities and anthropology play the major role of sociology", "in progress"));
+//        tasks.add(new TaskClass("Math", "Algorithyms", "in progress"));
+//        tasks.add(new TaskClass("Science", "Space is a topic in science", "completed"));
+//        tasks.add(new TaskClass("Sociology", "Humanities and anthropology play the major role of sociology", "in progress"));
 
 
         RecyclerView allTasks = findViewById(R.id.TaskID);
