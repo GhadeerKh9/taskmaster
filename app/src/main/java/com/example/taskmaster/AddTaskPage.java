@@ -7,9 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-public class Page3 extends AppCompatActivity {
+public class AddTaskPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,7 @@ public class Page3 extends AppCompatActivity {
 
                 System.out.println( ".....................>>>>>>>>>>>>>>>>" +  "Task ID is " + taskID + ".....................>>>>>>>>>>>>>>>>");
 
-                Intent intent = new Intent(Page3.this, MainActivity.class);
+                Intent intent = new Intent(AddTaskPage.this, MainActivity.class);
 
                 startActivity(intent);
             }

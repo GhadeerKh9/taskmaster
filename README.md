@@ -25,5 +25,5 @@
 
 ### In this lab we created database, added data to it by clicking on a button that is on some page, rendered the data on the home page, and when someone clicks on the data, they will be taken into another page that presents this data.PNG
 
-![image](Screenshots/Lab-29-1.PNG)
+![image](Screenshots/Lab29-1.PNG)
 ![image](Screenshots/Lab29-2.PNG)

@@ -18,7 +18,7 @@
             android:exported="true"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".Page3"
+            android:name=".AddTaskPage"
             android:exported="true"
             android:parentActivityName=".MainActivity" />
         <activity
