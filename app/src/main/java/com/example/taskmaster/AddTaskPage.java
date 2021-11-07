@@ -38,9 +38,9 @@ public class AddTaskPage extends AppCompatActivity {
 
                 System.out.println( ".....................>>>>>>>>>>>>>>>>" +  "Task ID is " + taskID + ".....................>>>>>>>>>>>>>>>>");
 
-                Intent intent = new Intent(AddTaskPage.this, MainActivity.class);
-
-                startActivity(intent);
+//                Intent intent = new Intent(AddTaskPage.this, MainActivity.class);
+//
+//                startActivity(intent);
             }
         });
 
