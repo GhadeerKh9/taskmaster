@@ -35,10 +35,10 @@ public class SettingsPage extends AppCompatActivity {
 
             editor.apply();
 
-
-            Intent intentOne = new Intent(this, MainActivity.class);
-
-            startActivity(intentOne);
+//
+//            Intent intentOne = new Intent(this, MainActivity.class);
+//
+//            startActivity(intentOne);
 
 
         });
