@@ -8,15 +8,23 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.AWSDataStorePlugin;
+import com.amplifyframework.datastore.generated.model.TaskClass;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    boolean configured=true;
     private TaskAdapter adapter;
 
     @Override
@@ -24,16 +32,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Button button1 = findViewById(R.id.addTask);
-//        button1.setOnClickListener(new View.OnClickListener() {
-//
-//    @Override
-//            public void onClick(View view){
-//        Intent intent1 = new Intent(MainActivity.this, Page2.class);
-//        startActivity(intent1);
-//    }
-//
-//        });
 
         Button button2Page1 = findViewById(R.id.Button3);
         button2Page1.setOnClickListener(new View.OnClickListener() {
@@ -56,91 +54,28 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-///////////////////////////////////////////////////////////////////////////////////
 
-//        Button task1Button = findViewById(R.id.Task1Button);
-//        task1Button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view){
-//                Intent intent4 = new Intent(MainActivity.this, TaskDetailPage.class);
-//                String task1 = task1Button.getText().toString();
-//
-//
-//                intent4.putExtra("title", task1);
-//
-//                startActivity(intent4);
-//
-//
-//
-//            }
-//
-//
-//
-//        });
-//
-//        Button task2Button = findViewById(R.id.Task2Button);
-//        task2Button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view){
-//                Intent intent5 = new Intent(MainActivity.this, TaskDetailPage.class);
-//                String task2 = task2Button.getText().toString();
-//
-//
-//                intent5.putExtra("title", task2);
-//
-//                startActivity(intent5);
-//
-//
-//
-//            }
-//
-//        });
-//
-//
-//        Button task3Button = findViewById(R.id.Task3Button);
-//        task3Button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view){
-//                Intent intent6 = new Intent(MainActivity.this, TaskDetailPage.class);
-//                String task3 = task3Button.getText().toString();
-//
-//
-//                intent6.putExtra("title", task3);
-//
-//                startActivity(intent6);
-//
-//
-//
-//            }
-//
-//
-//
-//
-//
-//        });
-
-   /////////////////////////////////////////////////////////
+        if(configured) {
+            configureAmplify();
+        }
 
 
-//        ArrayList<TaskClass> tasks = new ArrayList<TaskClass>();
-        List<TaskClass> tasks = TasksDatabase.getInstance(this).tasksDAO().getAll();
-
-//        tasks.add(new TaskClass("Math", "Algorithyms", "in progress"));
-//        tasks.add(new TaskClass("Science", "Space is a topic in science", "completed"));
-//        tasks.add(new TaskClass("Sociology", "Humanities and anthropology play the major role of sociology", "in progress"));
+        List<TaskClass> tasks = new ArrayList<TaskClass>();
+        tasks= gettingData();
 
 
         RecyclerView allTasks = findViewById(R.id.TaskID);
 
         allTasks.setLayoutManager(new LinearLayoutManager(this));
 
+        List<TaskClass> finalTasks = tasks;
         adapter = new TaskAdapter(tasks, new TaskAdapter.OnTaskItemClickListener() {
             @Override
             public void onItemClicked(int position) {
                 Intent goToDetailsIntent = new Intent(getApplicationContext(), TaskDetailPage.class);
-                goToDetailsIntent.putExtra("title", tasks.get(position).title);
-                goToDetailsIntent.putExtra("body", tasks.get(position).body);
-                goToDetailsIntent.putExtra("state", tasks.get(position).state);
+                goToDetailsIntent.putExtra("title", finalTasks.get(position).getTitle());
+                goToDetailsIntent.putExtra("body", finalTasks.get(position).getBody());
+                goToDetailsIntent.putExtra("state", finalTasks.get(position).getState());
                 startActivity(goToDetailsIntent);
 
             }
@@ -167,6 +102,36 @@ public class MainActivity extends AppCompatActivity {
 
         TextView tasks = findViewById(R.id.Message);
         tasks.setText(enteredName + "'s Tasks");
+    }
+
+    private void configureAmplify() {
+        configured=false;
+
+        try {
+
+            Amplify.addPlugin(new AWSDataStorePlugin());
+            Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.configure(getApplicationContext());
+            Log.i("MainActivity", "Initialized Amplify");
+        } catch (AmplifyException error) {
+            Log.e("MainActivity", "Could not initialize Amplify", error);
+        }}
+
+    private  List<TaskClass> gettingData(){
+        List<TaskClass> foundTask=new ArrayList<>();
+
+        Amplify.DataStore.query(
+                TaskClass.class,
+                queryMatches -> {
+                    while (queryMatches.hasNext()) {
+                        Log.i("MainActivity", "Founded");
+                        foundTask.add(queryMatches.next());
+                    }
+                },
+                error -> {
+                    Log.i("MainActivity",  "COULD NOT FIND TASK", error);
+                });
+        return  foundTask;
     }
 
 
