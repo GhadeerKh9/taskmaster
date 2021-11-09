@@ -37,4 +37,4 @@
 
 ### In this lab we used AWS dynamoDB to store our data and get it back, after installing AWS amplify.
 
-![DataBase Image](DataBase.png)
+![DataBase Image](Screenshots/DataBase.png)
