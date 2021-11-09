@@ -1,0 +1,62 @@
+# this is an auto generated file. This will be overwritten
+query SyncTaskClasses(
+  $filter: ModelTaskClassFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncTaskClasses(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      title
+      body
+      state
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query GetTaskClass($id: ID!) {
+  getTaskClass(id: $id) {
+    id
+    title
+    body
+    state
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+query ListTaskClasss(
+  $filter: ModelTaskClassFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTaskClasss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      body
+      state
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
