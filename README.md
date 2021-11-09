@@ -31,3 +31,10 @@
 
 # Lab 31
  ### In this lab we created unit tests for functionalities and completed all labs features.
+
+
+# Lab 32
+
+### In this lab we used AWS dynamoDB to store our data and get it back, after installing AWS amplify.
+
+![DataBase Image](DataBase.png)
