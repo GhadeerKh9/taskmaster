@@ -1,28 +1,20 @@
 package com.example.taskmaster;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
-import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.generated.model.TaskClass;
-import com.amplifyframework.datastore.generated.model.Team;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import com.amplifyframework.datastore.generated.model.TaskClass;
 
 public class AddTaskPage extends AppCompatActivity {
 
@@ -78,11 +70,22 @@ public class AddTaskPage extends AppCompatActivity {
 
 
 
-                System.out.println( ".....................>>>>>>>>>>>>>>>>" +  "Task ID is " + title + ".....................>>>>>>>>>>>>>>>>");
+                System.out.println( ".....................>>>>>>>>>>>>>>>>" +  "Task ID is " + title + ".....................>>>>>>>>>>>>>>>>"
 
+
+                );
+
+
+                Intent intent = new Intent(AddTaskPage.this, MainActivity.class);
+                startActivity(intent);
 
             }
+
+
+
         });
+
+
 
     }
 

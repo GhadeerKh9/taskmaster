@@ -1,105 +1,15 @@
 # this is an auto generated file. This will be overwritten
-mutation CreateTaskClass(
-  $input: CreateTaskClassInput!
-  $condition: ModelTaskClassConditionInput
-) {
-  createTaskClass(input: $input, condition: $condition) {
-    id
-    teamId
-    title
-    body
-    state
-    team {
-      id
-      teamName
-      tasks {
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-    _version
-    _deleted
-    _lastChangedAt
-    createdAt
-    updatedAt
-  }
-}
-mutation UpdateTaskClass(
-  $input: UpdateTaskClassInput!
-  $condition: ModelTaskClassConditionInput
-) {
-  updateTaskClass(input: $input, condition: $condition) {
-    id
-    teamId
-    title
-    body
-    state
-    team {
-      id
-      teamName
-      tasks {
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-    _version
-    _deleted
-    _lastChangedAt
-    createdAt
-    updatedAt
-  }
-}
-mutation DeleteTaskClass(
-  $input: DeleteTaskClassInput!
-  $condition: ModelTaskClassConditionInput
-) {
-  deleteTaskClass(input: $input, condition: $condition) {
-    id
-    teamId
-    title
-    body
-    state
-    team {
-      id
-      teamName
-      tasks {
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-    _version
-    _deleted
-    _lastChangedAt
-    createdAt
-    updatedAt
-  }
-}
 mutation CreateTeam(
   $input: CreateTeamInput!
   $condition: ModelTeamConditionInput
 ) {
   createTeam(input: $input, condition: $condition) {
     id
-    teamName
+    name
     tasks {
       items {
         id
-        teamId
+        teamID
         title
         body
         state
@@ -125,11 +35,11 @@ mutation UpdateTeam(
 ) {
   updateTeam(input: $input, condition: $condition) {
     id
-    teamName
+    name
     tasks {
       items {
         id
-        teamId
+        teamID
         title
         body
         state
@@ -155,11 +65,11 @@ mutation DeleteTeam(
 ) {
   deleteTeam(input: $input, condition: $condition) {
     id
-    teamName
+    name
     tasks {
       items {
         id
-        teamId
+        teamID
         title
         body
         state
@@ -172,6 +82,57 @@ mutation DeleteTeam(
       nextToken
       startedAt
     }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateTaskClass(
+  $input: CreateTaskClassInput!
+  $condition: ModelTaskClassConditionInput
+) {
+  createTaskClass(input: $input, condition: $condition) {
+    id
+    teamID
+    title
+    body
+    state
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateTaskClass(
+  $input: UpdateTaskClassInput!
+  $condition: ModelTaskClassConditionInput
+) {
+  updateTaskClass(input: $input, condition: $condition) {
+    id
+    teamID
+    title
+    body
+    state
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteTaskClass(
+  $input: DeleteTaskClassInput!
+  $condition: ModelTaskClassConditionInput
+) {
+  deleteTaskClass(input: $input, condition: $condition) {
+    id
+    teamID
+    title
+    body
+    state
     _version
     _deleted
     _lastChangedAt

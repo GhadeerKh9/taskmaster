@@ -19,18 +19,18 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the TaskClass type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "TaskClasses")
-@Index(name = "tasks", fields = {"teamId"})
+@Index(name = "byTeam", fields = {"teamID","title"})
 public final class TaskClass implements Model {
   public static final QueryField ID = field("TaskClass", "id");
-  public static final QueryField TEAM_ID = field("TaskClass", "teamId");
+  public static final QueryField TEAM_ID = field("TaskClass", "teamID");
   public static final QueryField TITLE = field("TaskClass", "title");
   public static final QueryField BODY = field("TaskClass", "body");
   public static final QueryField STATE = field("TaskClass", "state");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="ID", isRequired = true) String teamId;
+  private final @ModelField(targetType="ID", isRequired = true) String teamID;
   private final @ModelField(targetType="String", isRequired = true) String title;
-  private final @ModelField(targetType="String", isRequired = true) String body;
-  private final @ModelField(targetType="String", isRequired = true) String state;
+  private final @ModelField(targetType="String") String body;
+  private final @ModelField(targetType="String") String state;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
@@ -38,7 +38,7 @@ public final class TaskClass implements Model {
   }
   
   public String getTeamId() {
-      return teamId;
+      return teamID;
   }
   
   public String getTitle() {
@@ -61,9 +61,9 @@ public final class TaskClass implements Model {
       return updatedAt;
   }
   
-  private TaskClass(String id, String teamId, String title, String body, String state) {
+  private TaskClass(String id, String teamID, String title, String body, String state) {
     this.id = id;
-    this.teamId = teamId;
+    this.teamID = teamID;
     this.title = title;
     this.body = body;
     this.state = state;
@@ -106,7 +106,7 @@ public final class TaskClass implements Model {
     return new StringBuilder()
       .append("TaskClass {")
       .append("id=" + String.valueOf(getId()) + ", ")
-      .append("teamId=" + String.valueOf(getTeamId()) + ", ")
+      .append("teamID=" + String.valueOf(getTeamId()) + ", ")
       .append("title=" + String.valueOf(getTitle()) + ", ")
       .append("body=" + String.valueOf(getBody()) + ", ")
       .append("state=" + String.valueOf(getState()) + ", ")
@@ -140,7 +140,7 @@ public final class TaskClass implements Model {
   
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
-      teamId,
+      teamID,
       title,
       body,
       state);
@@ -151,29 +151,21 @@ public final class TaskClass implements Model {
   
 
   public interface TitleStep {
-    BodyStep title(String title);
-  }
-  
-
-  public interface BodyStep {
-    StateStep body(String body);
-  }
-  
-
-  public interface StateStep {
-    BuildStep state(String state);
+    BuildStep title(String title);
   }
   
 
   public interface BuildStep {
     TaskClass build();
     BuildStep id(String id);
+    BuildStep body(String body);
+    BuildStep state(String state);
   }
   
 
-  public static class Builder implements TeamIdStep, TitleStep, BodyStep, StateStep, BuildStep {
+  public static class Builder implements TeamIdStep, TitleStep, BuildStep {
     private String id;
-    private String teamId;
+    private String teamID;
     private String title;
     private String body;
     private String state;
@@ -183,7 +175,7 @@ public final class TaskClass implements Model {
         
         return new TaskClass(
           id,
-          teamId,
+          teamID,
           title,
           body,
           state);
@@ -192,27 +184,25 @@ public final class TaskClass implements Model {
     @Override
      public TitleStep teamId(String teamId) {
         Objects.requireNonNull(teamId);
-        this.teamId = teamId;
+        this.teamID = teamId;
         return this;
     }
     
     @Override
-     public BodyStep title(String title) {
+     public BuildStep title(String title) {
         Objects.requireNonNull(title);
         this.title = title;
         return this;
     }
     
     @Override
-     public StateStep body(String body) {
-        Objects.requireNonNull(body);
+     public BuildStep body(String body) {
         this.body = body;
         return this;
     }
     
     @Override
      public BuildStep state(String state) {
-        Objects.requireNonNull(state);
         this.state = state;
         return this;
     }

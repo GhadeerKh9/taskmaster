@@ -4,9 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,10 +13,10 @@ import android.os.Looper;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import com.amplifyframework.datastore.generated.model.TaskClass;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
@@ -26,7 +24,6 @@ import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.AWSDataStorePlugin;
-import com.amplifyframework.datastore.generated.model.TaskClass;
 import com.amplifyframework.datastore.generated.model.Team;
 
 import java.util.ArrayList;
@@ -112,8 +109,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
         SharedPreferences.Editor editor = sharedPreferences.edit();
+
 
         Button buttonSettings = findViewById(R.id.TaskViewer);
         buttonSettings.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
     }
 
 
@@ -146,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
         String Team = sharedPreferences.getString("Team","noTeam");
 
 
-
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         System.out.println(enteredName);
 
         TextView tasks = findViewById(R.id.Message);
@@ -173,9 +169,9 @@ public class MainActivity extends AppCompatActivity {
         });
         List<TaskClass> foundTask=new ArrayList<>();
         Amplify.API.query(
-                ModelQuery.list(TaskClass.class),
+                ModelQuery.list(com.amplifyframework.datastore.generated.model.TaskClass.class),
                 response -> {
-                    for (TaskClass todo : response.getData()) {
+                    for (com.amplifyframework.datastore.generated.model.TaskClass todo : response.getData()) {
                         foundTask.add(todo);
                         foundTask.toString();
                         Log.i("MyAmplifyApp", foundTask.toString());
@@ -237,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
         );
         if(x.equals(false)){
             Team todo1 = Team.builder()
-                    .teamName("Team 1").id("1")
+                    .name("Team 1").id("1")
                     .build();
 
             Amplify.API.mutate(
@@ -246,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
                     error -> Log.e("MyAmplifyApp", "Create failed", error)
             );
             Team todo2 = Team.builder()
-                    .teamName("Team 2").id("2")
+                    .name("Team 2").id("2")
                     .build();
 
             Amplify.API.mutate(
@@ -255,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
                     error -> Log.e("MyAmplifyApp", "Create failed", error)
             );
             Team todo3 = Team.builder()
-                    .teamName("Team 3").id("3")
+                    .name("Team 3").id("3")
                     .build();
 
             Amplify.API.mutate(

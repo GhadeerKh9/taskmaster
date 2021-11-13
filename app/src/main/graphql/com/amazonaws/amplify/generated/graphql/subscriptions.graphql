@@ -1,93 +1,12 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreateTaskClass {
-  onCreateTaskClass {
-    id
-    teamId
-    title
-    body
-    state
-    team {
-      id
-      teamName
-      tasks {
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-    _version
-    _deleted
-    _lastChangedAt
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateTaskClass {
-  onUpdateTaskClass {
-    id
-    teamId
-    title
-    body
-    state
-    team {
-      id
-      teamName
-      tasks {
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-    _version
-    _deleted
-    _lastChangedAt
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteTaskClass {
-  onDeleteTaskClass {
-    id
-    teamId
-    title
-    body
-    state
-    team {
-      id
-      teamName
-      tasks {
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-    _version
-    _deleted
-    _lastChangedAt
-    createdAt
-    updatedAt
-  }
-}
 subscription OnCreateTeam {
   onCreateTeam {
     id
-    teamName
+    name
     tasks {
       items {
         id
-        teamId
+        teamID
         title
         body
         state
@@ -110,11 +29,11 @@ subscription OnCreateTeam {
 subscription OnUpdateTeam {
   onUpdateTeam {
     id
-    teamName
+    name
     tasks {
       items {
         id
-        teamId
+        teamID
         title
         body
         state
@@ -137,11 +56,11 @@ subscription OnUpdateTeam {
 subscription OnDeleteTeam {
   onDeleteTeam {
     id
-    teamName
+    name
     tasks {
       items {
         id
-        teamId
+        teamID
         title
         body
         state
@@ -154,6 +73,48 @@ subscription OnDeleteTeam {
       nextToken
       startedAt
     }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateTaskClass {
+  onCreateTaskClass {
+    id
+    teamID
+    title
+    body
+    state
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateTaskClass {
+  onUpdateTaskClass {
+    id
+    teamID
+    title
+    body
+    state
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteTaskClass {
+  onDeleteTaskClass {
+    id
+    teamID
+    title
+    body
+    state
     _version
     _deleted
     _lastChangedAt

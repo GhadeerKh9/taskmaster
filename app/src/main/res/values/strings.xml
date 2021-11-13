@@ -2,6 +2,9 @@
     <string name="app_name">taskMaster</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="state" />
+    <string name="body" />
+    <string name="title" />
     <string-array name="planets_array">
         <item>Mercury</item>
         <item>Venus</item>
