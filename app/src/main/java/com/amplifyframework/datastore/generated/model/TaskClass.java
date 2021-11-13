@@ -1,6 +1,5 @@
 package com.amplifyframework.datastore.generated.model;
 
-import com.amplifyframework.core.model.annotations.BelongsTo;
 import com.amplifyframework.core.model.temporal.Temporal;
 
 import java.util.List;
@@ -23,19 +22,23 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 @Index(name = "tasks", fields = {"teamId"})
 public final class TaskClass implements Model {
   public static final QueryField ID = field("TaskClass", "id");
+  public static final QueryField TEAM_ID = field("TaskClass", "teamId");
   public static final QueryField TITLE = field("TaskClass", "title");
   public static final QueryField BODY = field("TaskClass", "body");
   public static final QueryField STATE = field("TaskClass", "state");
-  public static final QueryField TEAM = field("TaskClass", "teamId");
   private final @ModelField(targetType="ID", isRequired = true) String id;
+  private final @ModelField(targetType="ID", isRequired = true) String teamId;
   private final @ModelField(targetType="String", isRequired = true) String title;
   private final @ModelField(targetType="String", isRequired = true) String body;
   private final @ModelField(targetType="String", isRequired = true) String state;
-  private final @ModelField(targetType="Team", isRequired = true) @BelongsTo(targetName = "teamId", type = Team.class) Team team;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
       return id;
+  }
+  
+  public String getTeamId() {
+      return teamId;
   }
   
   public String getTitle() {
@@ -50,10 +53,6 @@ public final class TaskClass implements Model {
       return state;
   }
   
-  public Team getTeam() {
-      return team;
-  }
-  
   public Temporal.DateTime getCreatedAt() {
       return createdAt;
   }
@@ -62,12 +61,12 @@ public final class TaskClass implements Model {
       return updatedAt;
   }
   
-  public TaskClass(String id, String title, String body, String state, Team team) {
+  private TaskClass(String id, String teamId, String title, String body, String state) {
     this.id = id;
+    this.teamId = teamId;
     this.title = title;
     this.body = body;
     this.state = state;
-    this.team = team;
   }
   
   @Override
@@ -79,10 +78,10 @@ public final class TaskClass implements Model {
       } else {
       TaskClass taskClass = (TaskClass) obj;
       return ObjectsCompat.equals(getId(), taskClass.getId()) &&
+              ObjectsCompat.equals(getTeamId(), taskClass.getTeamId()) &&
               ObjectsCompat.equals(getTitle(), taskClass.getTitle()) &&
               ObjectsCompat.equals(getBody(), taskClass.getBody()) &&
               ObjectsCompat.equals(getState(), taskClass.getState()) &&
-              ObjectsCompat.equals(getTeam(), taskClass.getTeam()) &&
               ObjectsCompat.equals(getCreatedAt(), taskClass.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), taskClass.getUpdatedAt());
       }
@@ -92,10 +91,10 @@ public final class TaskClass implements Model {
    public int hashCode() {
     return new StringBuilder()
       .append(getId())
+      .append(getTeamId())
       .append(getTitle())
       .append(getBody())
       .append(getState())
-      .append(getTeam())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -107,17 +106,17 @@ public final class TaskClass implements Model {
     return new StringBuilder()
       .append("TaskClass {")
       .append("id=" + String.valueOf(getId()) + ", ")
+      .append("teamId=" + String.valueOf(getTeamId()) + ", ")
       .append("title=" + String.valueOf(getTitle()) + ", ")
       .append("body=" + String.valueOf(getBody()) + ", ")
       .append("state=" + String.valueOf(getState()) + ", ")
-      .append("team=" + String.valueOf(getTeam()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
       .toString();
   }
   
-  public static TitleStep builder() {
+  public static TeamIdStep builder() {
       return new Builder();
   }
   
@@ -141,11 +140,16 @@ public final class TaskClass implements Model {
   
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
+      teamId,
       title,
       body,
-      state,
-      team);
+      state);
   }
+  public interface TeamIdStep {
+    TitleStep teamId(String teamId);
+  }
+  
+
   public interface TitleStep {
     BodyStep title(String title);
   }
@@ -157,12 +161,7 @@ public final class TaskClass implements Model {
   
 
   public interface StateStep {
-    TeamStep state(String state);
-  }
-  
-
-  public interface TeamStep {
-    BuildStep team(Team team);
+    BuildStep state(String state);
   }
   
 
@@ -172,22 +171,29 @@ public final class TaskClass implements Model {
   }
   
 
-  public static class Builder implements TitleStep, BodyStep, StateStep, TeamStep, BuildStep {
+  public static class Builder implements TeamIdStep, TitleStep, BodyStep, StateStep, BuildStep {
     private String id;
+    private String teamId;
     private String title;
     private String body;
     private String state;
-    private Team team;
     @Override
      public TaskClass build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
         
         return new TaskClass(
           id,
+          teamId,
           title,
           body,
-          state,
-          team);
+          state);
+    }
+    
+    @Override
+     public TitleStep teamId(String teamId) {
+        Objects.requireNonNull(teamId);
+        this.teamId = teamId;
+        return this;
     }
     
     @Override
@@ -205,16 +211,9 @@ public final class TaskClass implements Model {
     }
     
     @Override
-     public TeamStep state(String state) {
+     public BuildStep state(String state) {
         Objects.requireNonNull(state);
         this.state = state;
-        return this;
-    }
-    
-    @Override
-     public BuildStep team(Team team) {
-        Objects.requireNonNull(team);
-        this.team = team;
         return this;
     }
     
@@ -230,12 +229,17 @@ public final class TaskClass implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String title, String body, String state, Team team) {
+    private CopyOfBuilder(String id, String teamId, String title, String body, String state) {
       super.id(id);
-      super.title(title)
+      super.teamId(teamId)
+        .title(title)
         .body(body)
-        .state(state)
-        .team(team);
+        .state(state);
+    }
+    
+    @Override
+     public CopyOfBuilder teamId(String teamId) {
+      return (CopyOfBuilder) super.teamId(teamId);
     }
     
     @Override
@@ -251,11 +255,6 @@ public final class TaskClass implements Model {
     @Override
      public CopyOfBuilder state(String state) {
       return (CopyOfBuilder) super.state(state);
-    }
-    
-    @Override
-     public CopyOfBuilder team(Team team) {
-      return (CopyOfBuilder) super.team(team);
     }
   }
   

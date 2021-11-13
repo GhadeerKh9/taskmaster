@@ -22,10 +22,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
 
 
-    public TaskAdapter(List<TaskClass> allStudentData, OnTaskItemClickListener listener) {
-        this.taskData = allStudentData;
-        this.listener = listener;
 
+    public TaskAdapter(List<TaskClass> taskData, OnTaskItemClickListener listener) {
+        this.taskData = taskData;
+        this.listener = listener;
     }
 
     public interface OnTaskItemClickListener {

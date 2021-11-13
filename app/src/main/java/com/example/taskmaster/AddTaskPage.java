@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -25,12 +26,7 @@ import java.util.List;
 
 public class AddTaskPage extends AppCompatActivity {
 
-    private TasksDAO taskDao;
-    private String teamId = "";
 
-
-
-    private final List<Team> teams = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,19 +34,8 @@ public class AddTaskPage extends AppCompatActivity {
         setContentView(R.layout.activity_page3);
 
 
-        Spinner teamsList = findViewById(R.id.spinner);
-        String[] teams = new String[]{"201-course", "301-course", "401-course"};
-        ArrayAdapter<String> TeamsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, teams);
-        teamsList.setAdapter(TeamsAdapter);
+/////////////////////////////////////////
 
-
-
-        TasksDatabase database = Room.databaseBuilder(getApplicationContext(), TasksDatabase.class, "task_List")
-                .allowMainThreadQueries().build();
-        taskDao = database.tasksDAO();
-
-
-        getTeamsDataFromCloud();
 
 
         Button addToDbButton = findViewById(R.id.AddToDB);
@@ -69,99 +54,48 @@ public class AddTaskPage extends AppCompatActivity {
                 String state = stateField.getText().toString();
 
 
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                SharedPreferences.Editor editor = sharedPreferences.edit();
+                RadioButton b1=findViewById(R.id.radioButton1);
+                RadioButton b2=findViewById(R.id.radioButton2);
+                RadioButton b3=findViewById(R.id.radioButton3);
+
+
+                String id = null;
+                if(b1.isChecked()){
+                    id="1";
+                }
+                else if(b2.isChecked()){
+                    id="2";
+                }
+                else if(b3.isChecked()){
+                    id="3";
+                }
 
 
 
-                com.example.taskmaster.TaskClass newTask = new com.example.taskmaster.TaskClass(title, body, state);
-                taskDao.insertItem(newTask);
 
 
-
-                Spinner teamSpinner = (Spinner) findViewById(R.id.spinner);
-                String teamName = teamSpinner.getSelectedItem().toString();
-
-                editor.putString("teamName", teamName);
-                editor.apply();
+                dataStore(title, body, state,id);
 
 
-
-
-                Log.i("ADD button", "THE TEAM ID:  " + getTeamId(teamName));
-
-                addTaskToCloud(title,
-                        body,
-                        state,
-                        new Team(getTeamId(teamName), teamName));
 
                 System.out.println( ".....................>>>>>>>>>>>>>>>>" +  "Task ID is " + title + ".....................>>>>>>>>>>>>>>>>");
-
-
-
-
-
-                //////////////////////////////////////////////////////////////
-
-
-
-//                TaskClass task = TaskClass.builder()
-//                        .title(title).body(body).state(state).build();
-//
-//                Amplify.API.mutate(
-//                        ModelMutation.create(task),
-//                        response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
-//                        error -> Log.e("MyAmplifyApp", "Create failed", error)
-//                );
-
-
-                ///////////////////////////////////////////////////////
 
 
             }
         });
 
-
-
     }
 
-    public void addTaskToCloud(String title, String body, String state, Team team) {
-        com.amplifyframework.datastore.generated.model.TaskClass task = com.amplifyframework.datastore.generated.model.TaskClass.builder()
-                .title(title)
-                .body(body)
-                .state(state)
-                .team(team)
-                .build();
+    private void dataStore(String title, String body, String state,String id) {
+        TaskClass task = TaskClass.builder().teamId(id).title(title).body(body).state(state).build();
 
-        Amplify.API.mutate(ModelMutation.create(task),
-                success -> Log.i("Add Task", "Saved item: " + task.getTitle()),
-                error -> Log.e("Add Task", "Could not save item to API", error));
 
-        Toast toast = Toast.makeText(this, "Task added!", Toast.LENGTH_LONG);
-        toast.show();
+        Amplify.API.mutate(ModelMutation.create(task),succuess-> {
+            Log.i("Add Task", "Saved to DYNAMODB");
+        }, error -> {
+            Log.i("Add Task", "error saving to DYNAMODB");
+        });
+
     }
-
-    private void getTeamsDataFromCloud() {
-        Amplify.API.query(ModelQuery.list(Team.class),
-                response -> {
-                    for (Team team : response.getData()) {
-                        teams.add(team);
-                        Log.i("Add Task", "TEAM ID FROM CLOUD IS:  " + team.getTeamName() + "  " + team.getId());
-                    }
-                },
-                error -> Log.e("Add Task", "Failed to get TEAM ID FROM CLOUD: " + error.toString())
-        );
-    }
-
-
-    public String getTeamId(String teamName) {
-        for (Team team : teams) {
-            if (team.getTeamName().equals(teamName)) {
-                return team.getId();
-            }
-        }
-        return "";
-    }
-
 
 }

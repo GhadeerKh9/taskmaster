@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -20,10 +21,6 @@ public class SettingsPage extends AppCompatActivity {
         setContentView(R.layout.activity_settings_page);
 
 
-        Spinner teamsList = findViewById(R.id.spinner_setting);
-        String[] teams = new String[]{"","201-course", "301-course", "401-course"};
-        ArrayAdapter<String> TeamsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, teams);
-        teamsList.setAdapter(TeamsAdapter);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -33,17 +30,33 @@ public class SettingsPage extends AppCompatActivity {
         findViewById(R.id.SaveButton).setOnClickListener(view -> {
 
             TextView text = findViewById(R.id.EnteredName);
-            Spinner teamSpinner = (Spinner) findViewById(R.id.spinner_setting);
-            String teamName = teamSpinner.getSelectedItem().toString();
-
-
-
 
             String name =text.getText().toString();
 
-            editor.putString("EnteredText",name);
-            editor.putString("teamName", teamName);
+////////////////////////////////////////////////////
 
+
+
+            RadioButton b1=findViewById(R.id.radioButtonSet1);
+            RadioButton b2=findViewById(R.id.radioButtonSet2);
+            RadioButton b3=findViewById(R.id.radioButtonSet3);
+
+
+            String id = null;
+            if(b1.isChecked()){
+                id="1";
+            }
+            else if(b2.isChecked()){
+                id="2";
+            }
+            else if(b3.isChecked()){
+                id="3";
+            }
+
+
+
+            editor.putString("Team",id);
+            editor.putString("EnteredText",name);
             editor.apply();
 
 //

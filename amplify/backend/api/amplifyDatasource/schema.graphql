@@ -8,6 +8,12 @@
 #}
 
 
+type Team @model {
+  id: ID!
+  teamName: String!
+  tasks: [TaskClass] @connection(keyName: "tasks", fields: ["id"])
+}
+
 type TaskClass
 @model
 @key(name: "tasks", fields: ["teamId"])
@@ -17,11 +23,5 @@ type TaskClass
   title: String!
   body: String!
   state: String!
-  team: Team! @connection(fields: ["teamId"])
 }
 
-type Team @model {
-  id: ID!
-  teamName: String!
-  tasks: [TaskClass] @connection(keyName: "tasks", fields: ["id"])
-}
