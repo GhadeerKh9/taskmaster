@@ -1,0 +1,37 @@
+#type Blog @model {
+#  id: ID!
+#  name: String!
+#  posts: [Post] @connection(keyName: "byBlog", fields: ["id"])
+#}
+#
+#type Post @model @key(name: "byBlog", fields: ["blogID"]) {
+#  id: ID!
+#  title: String!
+#  blogID: ID!
+#  blog: Blog @connection(fields: ["blogID"])
+#  comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
+#}
+#
+#type Comment @model @key(name: "byPost", fields: ["postID", "content"]) {
+#  id: ID!
+#  postID: ID!
+#  post: Post @connection(fields: ["postID"])
+#  content: String!
+#}
+
+
+type Team @model {
+  id: ID!
+  name: String!
+  tasks: [TaskClass] @connection(keyName: "byTeam", fields: ["id"])
+}
+
+type TaskClass @model @key(name: "byTeam", fields: ["teamID", "title"]) {
+  id: ID!
+  teamID: ID!
+  title : String!
+  body : String
+  state : String
+}
+
+
