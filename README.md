@@ -32,9 +32,23 @@
 # Lab 31
  ### In this lab we created unit tests for functionalities and completed all labs features.
 
+ 
+![image](Screenshots/Lab31-1.PNG)
+![image](Screenshots/Lab31-2.PNG)
 
 # Lab 32
 
 ### In this lab we used AWS dynamoDB to store our data and get it back, after installing AWS amplify.
 
 ![DataBase Image](Screenshots/DataBase.png)
+
+
+# Lab 33
+
+In this lab we used one to many relationship to save tasks to dynamoDB and to save teams as well. And then we can get the tasks of a certain team to be viewd in the home page after we picked this team in the settings page.  
+
+
+![DataBase Image](Screenshots/Lab33-1.PNG)
+![DataBase Image](Screenshots/Lab33-2.PNG)
+![DataBase Image](Screenshots/Lab33-3.PNG)
+![DataBase Image](Screenshots/Lab33-4.PNG)
