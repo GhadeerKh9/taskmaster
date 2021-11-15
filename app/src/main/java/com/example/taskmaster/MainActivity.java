@@ -34,31 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
     private TaskAdapter adapter;
 
-//        RecyclerView allTasks = findViewById(R.id.TaskID);
-//
-//        allTasks.setLayoutManager(new LinearLayoutManager(this));
-//
-////        List<TaskClass> finalTasks = tasksData ;
-//        adapter = new TaskAdapter(tasksData , new TaskAdapter.OnTaskItemClickListener() {
-//            @Override
-//            public void onItemClicked(int position) {
-//                Intent goToDetailsIntent = new Intent(getApplicationContext(), TaskDetailPage.class);
-//                goToDetailsIntent.putExtra("title", tasksData .get(position).getTitle());
-//                goToDetailsIntent.putExtra("body", tasksData .get(position).getBody());
-//                goToDetailsIntent.putExtra("state", tasksData .get(position).getState());
-//                startActivity(goToDetailsIntent);
-//
-//            }
-//        });
-//
-//
-//
-//        allTasks.setAdapter(adapter);
-//
-//    }
-//
-
-
 
 
 
@@ -126,7 +101,18 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-
+        Button signOut=findViewById(R.id.logout);
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Amplify.Auth.signOut(
+                        () -> Log.i("AuthQuickstart", "Signed out successfully"),
+                        error -> Log.e("AuthQuickstart", error.toString())
+                );
+                Intent intent = new Intent(MainActivity.this,SignUp.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
