@@ -31,7 +31,7 @@ public class EspressoTest {
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(MainActivity.class);
     @Test
     public void taskViewerButtonTest(){
-        onView(withId(R.id.TaskViewer)).perform(click());
+        onView(withId(R.id.TaskDetailPageId)).perform(click());
         onView(withId(R.id.EnteredName)).perform(typeText("Name"), closeSoftKeyboard());
         onView(withId(R.id.SaveButton)).perform(click());
         onView(isRoot()).perform(ViewActions.pressBack());

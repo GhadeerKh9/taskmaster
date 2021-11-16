@@ -19,89 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
-//
-//    List<TaskClass> taskData = new ArrayList<>();
-//
-//
-//    private OnTaskItemClickListener listener;
-
-
-//    public TaskAdapter(List<TaskClass> taskData) {
-//        this.taskData = taskData;
-//    }
-
-//    public TaskAdapter(List<TaskClass> taskData, OnTaskItemClickListener listener) {
-//        this.taskData = taskData;
-//        this.listener = listener;
-//    }
-
-//    public interface OnTaskItemClickListener {
-//        void onItemClicked(int position);
-//
-//    }
-//
-//
-//    public static class TaskViewHolder extends RecyclerView.ViewHolder {
-
-//
-//        public TaskClass task;
-//
-//
-//
-//        View itemView;
-//
-//        public TaskViewHolder(@NonNull View itemView, OnTaskItemClickListener listener) {
-//            super(itemView);
-//            this.itemView = itemView;
-//
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    listener.onItemClicked(getAdapterPosition());
-//                }
-//            });
-//        }
-//    }
-//
-//
-//    @NonNull
-//    @Override
-//
-//    public TaskViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//
-//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_task, parent , false);
-//
-//
-//
-//        return  new TaskViewHolder(view, listener);
-//    }
-//
-//    @Override
-//    public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
-//
-//        holder.task = taskData.get(position);
-//        TextView title = holder.itemView.findViewById(R.id.TitleID);
-//        TextView body = holder.itemView.findViewById(R.id.BodyID);
-//        TextView state = holder.itemView.findViewById(R.id.StateID);
-//
-//
-//        title.setText(holder.task.getTitle());
-//        body.setText(holder.task.getBody());
-//        state.setText(holder.task.getState());
-//
-//
-//    }
-//
-//
-//    @Override
-//
-//    public int getItemCount() {
-//
-//        return taskData.size();
-//    }
-//
-
-////////////////////////////////// kafaween
 
 
 
@@ -138,6 +55,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
 
                 String Task1 =viewHolder.textViewTitle.getText().toString();
                 editor.putString("TaskName",Task1);
+
+                String imageName=task.getImg();   /// lab37
+                editor.putString("img",imageName);  // lab37
                 editor.apply();
                 Intent gotToStd = new Intent(context,TaskDetailPage.class);
                 context.startActivity(gotToStd);

@@ -1,5 +1,6 @@
 package com.example.taskmaster;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,9 +17,17 @@ import com.amplifyframework.core.Amplify;
 
 import com.amplifyframework.datastore.generated.model.TaskClass;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 public class AddTaskPage extends AppCompatActivity {
 
 
+
+    String img = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +35,13 @@ public class AddTaskPage extends AppCompatActivity {
         setContentView(R.layout.activity_page3);
 
 
-/////////////////////////////////////////
+        Button addFile = findViewById(R.id.uploadImg);
+        addFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFileFromDevice();
+            }
+        });
 
 
 
@@ -51,6 +66,8 @@ public class AddTaskPage extends AppCompatActivity {
                 RadioButton b3=findViewById(R.id.radioButton3);
 
 
+
+
                 String id = null;
                 if(b1.isChecked()){
                     id="1";
@@ -66,7 +83,7 @@ public class AddTaskPage extends AppCompatActivity {
 
 
 
-                dataStore(title, body, state,id);
+                dataStore(title, body, state, id, img);
 
 
 
@@ -89,8 +106,8 @@ public class AddTaskPage extends AppCompatActivity {
 
     }
 
-    private void dataStore(String title, String body, String state,String id) {
-        TaskClass task = TaskClass.builder().teamId(id).title(title).body(body).state(state).build();
+    private void dataStore(String title, String body, String state,String id, String img) {
+        TaskClass task = TaskClass.builder().teamId(id).title(title).body(body).state(state).img(img).build();
 
 
         Amplify.API.mutate(ModelMutation.create(task),succuess-> {
@@ -99,6 +116,40 @@ public class AddTaskPage extends AppCompatActivity {
             Log.i("Add Task", "error saving to DYNAMODB");
         });
 
+    }
+
+
+    private void getFileFromDevice() {
+        Intent chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
+        chooseFile.setType("*/*");
+        chooseFile = Intent.createChooser(chooseFile, "Choose a File");
+        startActivityForResult(chooseFile, 1234);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        File uploadFile = new File(getApplicationContext().getFilesDir(), "uploadFileCopied");
+        try {
+            InputStream exampleInputStream = getContentResolver().openInputStream(data.getData());
+            OutputStream outputStream = new FileOutputStream(uploadFile);
+            img = data.getData().toString();
+            byte[] buff = new byte[1024];
+            int length;
+            while ((length = exampleInputStream.read(buff)) > 0) {
+                outputStream.write(buff, 0, length);
+            }
+            exampleInputStream.close();
+            outputStream.close();
+            Amplify.Storage.uploadFile(
+                    "image",
+                    uploadFile,
+                    result -> Log.i("MyAmplifyApp", "Successfully uploaded: " + result.getKey()),
+                    storageFailure -> Log.e("MyAmplifyApp", "Upload failed", storageFailure)
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

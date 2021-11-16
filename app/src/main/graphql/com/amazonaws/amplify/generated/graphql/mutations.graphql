@@ -13,6 +13,7 @@ mutation CreateTeam(
         title
         body
         state
+        img
         _version
         _deleted
         _lastChangedAt
@@ -43,6 +44,7 @@ mutation UpdateTeam(
         title
         body
         state
+        img
         _version
         _deleted
         _lastChangedAt
@@ -73,6 +75,7 @@ mutation DeleteTeam(
         title
         body
         state
+        img
         _version
         _deleted
         _lastChangedAt
@@ -99,6 +102,7 @@ mutation CreateTaskClass(
     title
     body
     state
+    img
     _version
     _deleted
     _lastChangedAt
@@ -116,6 +120,7 @@ mutation UpdateTaskClass(
     title
     body
     state
+    img
     _version
     _deleted
     _lastChangedAt
@@ -133,6 +138,7 @@ mutation DeleteTaskClass(
     title
     body
     state
+    img
     _version
     _deleted
     _lastChangedAt
