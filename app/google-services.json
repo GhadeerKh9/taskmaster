@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "400475955497",
+    "project_id": "taskmasterghadeer",
+    "storage_bucket": "taskmasterghadeer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400475955497:android:5bd766835904cd4a229738",
+        "android_client_info": {
+          "package_name": "com.example.taskmaster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "400475955497-mbgplsq82see2h8qc1se2o0cc8358k32.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0Aid5ris6NbbyMaHfAMYmUmIg3QEt31s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "400475955497-mbgplsq82see2h8qc1se2o0cc8358k32.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
