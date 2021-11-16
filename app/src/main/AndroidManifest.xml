@@ -13,6 +13,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TaskMaster">
         <activity
+            android:name=".SignUpVerification"
+            android:exported="true" />
+        <activity
+            android:name=".SignIn"
+            android:exported="true" />
+        <activity
+            android:name=".SignUp"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".TaskDetailPage"
             android:exported="true"
             android:parentActivityName=".MainActivity" />
@@ -23,11 +38,10 @@
         <activity
             android:name=".AddTaskPage"
             android:exported="true"
-            android:parentActivityName=".MainActivity" />
-<!--        <activity-->
-<!--            android:name=".Page2"-->
-<!--            android:exported="true"-->
-<!--            android:parentActivityName=".MainActivity" />-->
+            android:parentActivityName=".MainActivity" /> <!-- <activity -->
+        <!-- android:name=".Page2" -->
+        <!-- android:exported="true" -->
+        <!-- android:parentActivityName=".MainActivity" /> -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
