@@ -27,6 +27,7 @@ import com.amazonaws.mobileconnectors.pinpoint.PinpointManager;
 import com.amazonaws.mobileconnectors.pinpoint.targeting.TargetingClient;
 import com.amazonaws.mobileconnectors.pinpoint.targeting.endpointProfile.EndpointProfile;
 import com.amazonaws.mobileconnectors.pinpoint.targeting.endpointProfile.EndpointProfileUser;
+import com.amplifyframework.analytics.AnalyticsEvent;
 import com.amplifyframework.datastore.generated.model.TaskClass;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         creatTeams();
         getPinpointManager(getApplicationContext());
         assignUserIdToEndpoint();
+        recordEvents();
 
 
         RecyclerView allTasksRecyclerView = findViewById(R.id.TaskID);
@@ -303,6 +305,19 @@ public class MainActivity extends AppCompatActivity {
         targetingClient.updateEndpointProfile(endpointProfile);
         Log.d("TAG", "Assigned user ID " + endpointProfileUser.getUserId() +
                 " to endpoint " + endpointProfile.getEndpointId());
+    }
+
+
+    public void recordEvents() {
+        AnalyticsEvent event = AnalyticsEvent.builder()
+                .name("PasswordReset")
+                .addProperty("Channel", "SMS")
+                .addProperty("Successful", true)
+                .addProperty("ProcessDuration", 792)
+                .addProperty("UserAge", 120.3)
+                .build();
+
+        Amplify.Analytics.recordEvent(event);
     }
 
 

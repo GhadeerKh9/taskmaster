@@ -28,11 +28,10 @@
 ![image](Screenshots/Lab29-1.PNG)
 ![image](Screenshots/Lab29-2.PNG)
 
-
 # Lab 31
- ### In this lab we created unit tests for functionalities and completed all labs features.
 
- 
+### In this lab we created unit tests for functionalities and completed all labs features.
+
 ![image](Screenshots/Lab31-1.PNG)
 ![image](Screenshots/Lab31-2.PNG)
 
@@ -42,53 +41,43 @@
 
 ![DataBase Image](Screenshots/DataBase.png)
 
-
 # Lab 33
 
-In this lab we used one to many relationship to save tasks to dynamoDB and to save teams as well. And then we can get the tasks of a certain team to be viewd in the home page after we picked this team in the settings page.  
-
+In this lab we used one to many relationship to save tasks to dynamoDB and to save teams as well. And then we can get the tasks of a certain team to be viewd in the home page after we picked this team in the settings page.
 
 ![DataBase Image](Screenshots/Lab33-1.PNG)
 ![DataBase Image](Screenshots/Lab33-2.PNG)
 ![DataBase Image](Screenshots/Lab33-3.PNG)
 ![DataBase Image](Screenshots/Lab33-4.PNG)
 
-
 # Lab 34
 
 In this lab, we added the apk file and uploaded application on google play store
-
-
 
 # Lab 36
 
 In this lab we created sign out, sign in at signout activities using cognito. user can sign out and sign in and they will be saved in DynamoDB
 
-
 ![Lab33](Screenshots/Lab36-1.PNG)
 ![Lab33](Screenshots/Lab36-2.PNG)
 ![Lab33](Screenshots/Lab36-3.PNG)
-
 
 # Lab 37
 
 In this lab we used s3 to add an image to the add task page, this image corresponds to the specific team you pick. This
 
 ![Lab33](Screenshots/Lab37-1.PNG)
-
-
+![Lab33](Screenshots/Lab37-2.PNG)
 
 # Lab 38
-
 
 In this lab we created a notificarion, We used firebase and aws to create it and open it in some activity.
 
 ![Lab33](Screenshots/Lab38-1.PNG)
 ![Lab33](Screenshots/Lab38-2.PNG)
 
+# Lab 39
 
+In this lab we added analytics to our application that's reflected on AWS analytics and firebase analytics.PNG
 
-
- 
-
-
+![Lab33](Screenshots/Lab39-1.PNG)
