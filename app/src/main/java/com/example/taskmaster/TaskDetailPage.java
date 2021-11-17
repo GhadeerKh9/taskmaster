@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amplifyframework.analytics.AnalyticsEvent;
 import com.amplifyframework.core.Amplify;
 import com.squareup.picasso.Picasso;
 
@@ -29,6 +30,9 @@ public class TaskDetailPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tas_detail_page);
+
+
+        recordEvents();
 
 //    Bundle extras = getIntent().getExtras();
 //        if (extras != null) {
@@ -79,6 +83,18 @@ public class TaskDetailPage extends AppCompatActivity {
         );
     }
 
+
+    public void recordEvents() {
+        AnalyticsEvent event = AnalyticsEvent.builder()
+                .name("PasswordReset")
+                .addProperty("Channel", "SMS")
+                .addProperty("Successful", true)
+                .addProperty("ProcessDuration", 792)
+                .addProperty("UserAge", 120.3)
+                .build();
+
+        Amplify.Analytics.recordEvent(event);
+    }
 
     }
 
