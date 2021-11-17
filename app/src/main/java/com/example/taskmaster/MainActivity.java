@@ -149,16 +149,7 @@ public class MainActivity extends AppCompatActivity {
         TextView tasks = findViewById(R.id.Message);
         tasks.setText(enteredName + "'s Tasks");
     }
-//
-//    private void configureAmplify() {
-//        try {
-//            Amplify.addPlugin(new AWSDataStorePlugin());
-//            Amplify.addPlugin(new AWSApiPlugin());
-//            Amplify.configure(getApplicationContext());
-//            Log.i("Main", "Initialized Amplify");
-//        } catch (AmplifyException error) {
-//            Log.e("Main", "Could not initialize Amplify", error);
-//        }}
+
 
     private  List<TaskClass> GetData( RecyclerView allTaskDataRecyclerView ){
         Handler handler = new Handler(Looper.myLooper(), new Handler.Callback() {
