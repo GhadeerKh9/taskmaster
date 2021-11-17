@@ -81,6 +81,9 @@ dependencies {
     implementation 'com.amazonaws:aws-android-sdk-mobile-client:2.33.0'
 
 
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+
 
 
 }

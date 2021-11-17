@@ -126,6 +126,7 @@ public class AddTaskPage extends AppCompatActivity {
         startActivityForResult(chooseFile, 1234);
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -142,7 +143,7 @@ public class AddTaskPage extends AppCompatActivity {
             exampleInputStream.close();
             outputStream.close();
             Amplify.Storage.uploadFile(
-                    "image",
+                    "img",
                     uploadFile,
                     result -> Log.i("MyAmplifyApp", "Successfully uploaded: " + result.getKey()),
                     storageFailure -> Log.e("MyAmplifyApp", "Upload failed", storageFailure)
