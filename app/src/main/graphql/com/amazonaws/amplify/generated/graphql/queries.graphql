@@ -40,6 +40,8 @@ query GetTeam($id: ID!) {
         body
         state
         img
+        lat
+        lon
         _version
         _deleted
         _lastChangedAt
@@ -98,6 +100,8 @@ query SyncTaskClasses(
       body
       state
       img
+      lat
+      lon
       _version
       _deleted
       _lastChangedAt
@@ -116,6 +120,8 @@ query GetTaskClass($id: ID!) {
     body
     state
     img
+    lat
+    lon
     _version
     _deleted
     _lastChangedAt
@@ -136,6 +142,8 @@ query ListTaskClasss(
       body
       state
       img
+      lat
+      lon
       _version
       _deleted
       _lastChangedAt

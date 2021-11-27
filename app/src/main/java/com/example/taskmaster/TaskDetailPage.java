@@ -2,20 +2,16 @@ package com.example.taskmaster;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.amplifyframework.analytics.AnalyticsEvent;
 import com.amplifyframework.core.Amplify;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
@@ -73,7 +69,7 @@ public class TaskDetailPage extends AppCompatActivity {
                 "img",
                 new File(getApplicationContext().getFilesDir() + "/download.jpg"),
                 result -> {
-                    ImageView image = findViewById(R.id.imgeViewIdDetail);
+                    ImageView image = findViewById(R.id.imageId);
                     sharedPreferences.getString("img", "");
                     image.setImageBitmap(BitmapFactory.decodeFile(result.getFile().getPath()));
 
