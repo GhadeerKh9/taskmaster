@@ -2,20 +2,16 @@ package com.example.taskmaster;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.amplifyframework.analytics.AnalyticsEvent;
 import com.amplifyframework.core.Amplify;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
@@ -34,19 +30,7 @@ public class TaskDetailPage extends AppCompatActivity {
 
         recordEvents();
 
-//    Bundle extras = getIntent().getExtras();
-//        if (extras != null) {
-//        String taskName = extras.getString("title");
-//        TextView text = findViewById(R.id.TaskTitle);
-//        text.setText(taskName);
-//
-//        String taskBody = extras.getString("body");
-//        TextView text2 = findViewById(R.id.textView8);
-//        text2.setText(taskBody);
-//
-//        String taskState = extras.getString("state");
-//        TextView text3 = findViewById(R.id.textView7);
-//        text3.setText(taskState);
+
 
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -65,15 +49,15 @@ public class TaskDetailPage extends AppCompatActivity {
         state.setText(stateName);
 
 
-//        String img =  sharedPreferences.getString("img", "");
+        String img =  sharedPreferences.getString("img", "");
 
 
 
         Amplify.Storage.downloadFile(
-                "img",
+                img,
                 new File(getApplicationContext().getFilesDir() + "/download.jpg"),
                 result -> {
-                    ImageView image = findViewById(R.id.imgeViewIdDetail);
+                    ImageView image = findViewById(R.id.imageId);
                     sharedPreferences.getString("img", "");
                     image.setImageBitmap(BitmapFactory.decodeFile(result.getFile().getPath()));
 

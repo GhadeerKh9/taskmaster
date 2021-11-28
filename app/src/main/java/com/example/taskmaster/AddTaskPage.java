@@ -3,6 +3,7 @@ package com.example.taskmaster;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,12 +24,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AddTaskPage extends AppCompatActivity {
 
 
 
     String img = "";
+    String imageKey = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +115,7 @@ public class AddTaskPage extends AppCompatActivity {
     }
 
     private void dataStore(String title, String body, String state,String id, String img) {
-        TaskClass task = TaskClass.builder().teamId(id).title(title).body(body).state(state).img(img).build();
+        TaskClass task = TaskClass.builder().teamId(id).title(title).body(body).state(state).img(imageKey).build();
 
 
         Amplify.API.mutate(ModelMutation.create(task),succuess-> {
@@ -131,6 +135,7 @@ public class AddTaskPage extends AppCompatActivity {
     }
 
 
+    @SuppressLint("SimpleDateFormat")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -146,17 +151,20 @@ public class AddTaskPage extends AppCompatActivity {
             }
             exampleInputStream.close();
             outputStream.close();
+            SimpleDateFormat formatter = new SimpleDateFormat("dd_MMMMM_yyyy_HH_mm_ss");
+            String imageName = formatter.format(new Date());
             Amplify.Storage.uploadFile(
-                    "img",
+                    imageName,
                     uploadFile,
-                    result -> Log.i("MyAmplifyApp", "Successfully uploaded: " + result.getKey()),
+                    result -> {Log.i("MyAmplifyApp", "Successfully uploaded: " + result.getKey());
+                        imageKey = result.getKey();
+                    },
                     storageFailure -> Log.e("MyAmplifyApp", "Upload failed", storageFailure)
             );
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 
     public void recordEvents() {
         AnalyticsEvent event = AnalyticsEvent.builder()

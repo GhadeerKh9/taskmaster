@@ -14,6 +14,8 @@ mutation CreateTeam(
         body
         state
         img
+        lat
+        lon
         _version
         _deleted
         _lastChangedAt
@@ -45,6 +47,8 @@ mutation UpdateTeam(
         body
         state
         img
+        lat
+        lon
         _version
         _deleted
         _lastChangedAt
@@ -76,6 +80,8 @@ mutation DeleteTeam(
         body
         state
         img
+        lat
+        lon
         _version
         _deleted
         _lastChangedAt
@@ -103,6 +109,8 @@ mutation CreateTaskClass(
     body
     state
     img
+    lat
+    lon
     _version
     _deleted
     _lastChangedAt
@@ -121,6 +129,8 @@ mutation UpdateTaskClass(
     body
     state
     img
+    lat
+    lon
     _version
     _deleted
     _lastChangedAt
@@ -139,6 +149,8 @@ mutation DeleteTaskClass(
     body
     state
     img
+    lat
+    lon
     _version
     _deleted
     _lastChangedAt

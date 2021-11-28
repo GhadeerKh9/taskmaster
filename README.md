@@ -78,6 +78,12 @@ In this lab we created a notificarion, We used firebase and aws to create it and
 
 # Lab 39
 
-In this lab we added analytics to our application that's reflected on AWS analytics and firebase analytics.PNG
+In this lab we added analytics to our application that's reflected on AWS analytics and firebase analytics.
 
-![Lab33](Screenshots/Lab39-1.PNG)
+![Lab39](Screenshots/Lab39-1.PNG)
+
+# Lab 43
+
+In this lab we checked our applications' analytics that's reflected on AWS analytics and firebase analytics, took screenshots and presented them on GitHub.
+
+![Lab43](Screenshots/Lab43-1.PNG)

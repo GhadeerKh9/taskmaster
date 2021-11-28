@@ -33,6 +33,8 @@ type TaskClass @model @key(name: "byTeam", fields: ["teamID", "title"]) {
   body : String
   state : String
   img:String
+  lat : String
+  lon : String
 }
 
 

@@ -53,11 +53,23 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
             public void onClick(View view) {
                 Log.d("my Adapter", "Element "+ viewHolder.getAdapterPosition() + " clicked");
 
-//                String Task1 =viewHolder.textViewTitle.getText().toString();
-//                editor.putString("TaskName",Task1);
+//
+
+
+
+                String title =viewHolder.textViewTitle.getText().toString();
+                editor.putString("title", title);
+                String body =viewHolder.textViewBody.getText().toString();
+                editor.putString("body", body);
+                String state =viewHolder.textViewState.getText().toString();
+                editor.putString("state", state);
+
 
                 String imageName=task.getImg();   /// lab37
                 editor.putString("img",imageName);  // lab37
+
+
+
                 editor.apply();
                 Intent gotToStd = new Intent(context,TaskDetailPage.class);
                 context.startActivity(gotToStd);
