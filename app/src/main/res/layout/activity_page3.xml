@@ -133,17 +133,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.767" />
 
+
     <ImageView
         android:id="@+id/imageId"
         android:layout_width="124dp"
         android:layout_height="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintHorizontal_bias="0.898"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.614" />
-
+        app:layout_constraintVertical_bias="0.596" />
 
     <Button
         android:id="@+id/mapsId"

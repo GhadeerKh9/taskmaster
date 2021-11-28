@@ -30,19 +30,7 @@ public class TaskDetailPage extends AppCompatActivity {
 
         recordEvents();
 
-//    Bundle extras = getIntent().getExtras();
-//        if (extras != null) {
-//        String taskName = extras.getString("title");
-//        TextView text = findViewById(R.id.TaskTitle);
-//        text.setText(taskName);
-//
-//        String taskBody = extras.getString("body");
-//        TextView text2 = findViewById(R.id.textView8);
-//        text2.setText(taskBody);
-//
-//        String taskState = extras.getString("state");
-//        TextView text3 = findViewById(R.id.textView7);
-//        text3.setText(taskState);
+
 
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -61,12 +49,12 @@ public class TaskDetailPage extends AppCompatActivity {
         state.setText(stateName);
 
 
-//        String img =  sharedPreferences.getString("img", "");
+        String img =  sharedPreferences.getString("img", "");
 
 
 
         Amplify.Storage.downloadFile(
-                "img",
+                img,
                 new File(getApplicationContext().getFilesDir() + "/download.jpg"),
                 result -> {
                     ImageView image = findViewById(R.id.imageId);
